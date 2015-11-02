@@ -18,6 +18,11 @@
         "sensio/distribution-bundle": "~2.3",
         "sensio/framework-extra-bundle": "^3.0.2",
         "sensio/generator-bundle": "~2.3",
+        "knplabs/knp-paginator-bundle": "~2.4",
+        "ircmaxell/password-compat": "dev-master",
+        "gregwar/image-bundle": "dev-master",
+        "imag/ldap-bundle": "dev-master",
+        "phpspec/phpspec": "~2.1",
         "incenteev/composer-parameter-handler": "~2.0"
     },
     "scripts": {
