@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+	{% for flashMessage in app.session.flashbag.get('succes') %}
+		<div class="flash-notice"> 
+			{{ flashMessage }}
+		</div>
+	{% endfor %}
+	
+	<h2> My Profile </h2>
+	{{ profile.name }}
+{% endblock body %}

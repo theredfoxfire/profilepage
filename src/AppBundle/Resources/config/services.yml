@@ -1,0 +1,70 @@
+parameters: []
+
+services:
+ controllers.security:
+  class: AppBundle\Controller\SecurityController
+  arguments:
+   - @templating
+   
+ controllers.show_my_profile:
+  class: AppBundle\Controller\ShowMyProfileController
+  arguments:
+   - @use_case.get_manager_projects
+   - @security.token
+   - @form_view.create_project
+   - @templatting
+ 
+ controllers.create_project:
+  class: AppBundle\Controller\CreateProfileController
+  arguments:
+   - @use_case.create_project
+   - @security.token
+   - @form.create_project
+   - @session.flashbag
+   - @router
+  tags:
+   - { name: kernel.event_listener, event: app_tracker.profile_creation_success, method: onSuccess }
+   - { name: kernel.event_listener, event: app_tracker.profile_creation_failure, method: onFailure }
+   
+ use_case.get_use_profile:
+  class: AppTracker\GetUserProfile
+  arguments:
+   - @repository.projects
+   
+ use_case.create_profile:
+  class: AppTracker\CreateProfile
+  arguments:
+   - @repository.profile
+   - @event_dispatcher
+ 
+ repository.profile:
+  class: Doctrine\Common\Persistence\ObjectRepository
+  factory_service: doctrine
+  factory_method: getRepository
+  arguments:
+   - CeremonyTrackerBundle:Project
+   
+ form.create_profile:
+  class: Symfony\Component\Form\FormInterface
+  factory_service: form.factory
+  factory_method: create
+  arguments:
+   - @form_type.create_profile
+   - []
+ form_view.create_profile:
+  class: Symfony\Component\Form\FormView
+  factory_sevice: form.create_profile
+  factory_method: createView
+ 
+ form_type.create_profile
+  class: AppBundle\Form\CreateProfileType
+ 
+ session.flashbag:
+  class: Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface
+  factory_service: session
+  factory_method: getFlashBag
+  
+ security.token:
+  class: Symfony\Component\Security\Core\Authenctication\Token\TokenInterface
+  factory_service: security.context
+  factory_method: getToken

@@ -1,0 +1,21 @@
+login:
+ path: /login
+ defaults: { _controller: controllers.security:loginActions }
+ 
+login_check:
+ path: /login_check
+ 
+logout:
+ path: /logout
+
+show_my_profile:
+ path: /
+ defaults: { _controller: controllers.show_my_profile:showAction }
+ requirements:
+  _method: GET
+  
+create_profile:
+ path: /
+ defaults: { _controller: controllers.create_profile:createAction }
+ requirements:
+  _method: POST
