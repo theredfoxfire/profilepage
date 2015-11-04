@@ -2,13 +2,13 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixturesInterface;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\ProfileUser;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadProfileUser implements FixturesInterface, ContainerAwareInterface
+class LoadProfileUser implements FixtureInterface, ContainerAwareInterface
 {
 	private $container;
 	
