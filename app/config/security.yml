@@ -1,14 +1,14 @@
 security:
     encoders:
-        AppBundle\Entity\ProfileUser: sha512
+        AppBundle\Entity\User: sha512
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        profile_user:
-            entity: { class: AppBundle:ProfileUser, property: name }
+        user:
+            entity: { class: AppBundle:User, property: username }
 
     firewalls:
         dev:
@@ -27,4 +27,5 @@ security:
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/user, roles: ROLE_USER }

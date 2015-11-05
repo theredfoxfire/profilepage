@@ -2,45 +2,43 @@
 
 namespace AppBundle\Controller;
 
-use AppTracker\GetUserProfile;
 use AppBundle\Entity\Profile;
+use AppBundle\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Templatting\EngineInterface;
-use Symfony\Component\Form\FormView;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-class ShowMyProfileController
+class ShowMyProfileController extends Controller
 {
-	private $useCase;
-	private $securityToken;
-	private $profileFormView;
-	private $templating;
-	
-	public function __construct(
-		GetUserProfile $useCase,
-		TokenInterface $securityToken,
-		FormView $profileFormView,
-		EngineInterface $templating
-	)
+	/**
+	 * @Route("/", name="person_list")
+	 * @Method({"GET"})
+	 */
+	public function listAction()
 	{
-		$this->useCase = $useCase;
-		$this->securityToken = $securityToken;
-		$this->profileFormView = $profileFormView;
-		$this->templating = $templating;
-	}
-	
-	public function showAction()
-	{
-		$profile = $this->useCase->getUserProfile($this->securityToken->getUser());
+		$em = $this->getDoctrine()->getManager();
+		$listPerson = $em->getRepository("AppBundle:User")->getPersonList();
 		
-		return $this->templating->renderResponse('AppBundle:Profile:show.html.twig', [
-			'profile_form' => $this->profileFormView,
-			'profile' => array_map([$this, 'prepareProfileView'], $profile),
-		]);
+		return $this->render('front/profile/list.html.twig', array(
+			'listPerson' => $listPerson,
+		));
 	}
 	
-	public function prepareProfileView(Profile $profile)
+	/**
+	 * @Route("/person/show/profile/{id}", requirements={"id" = "\d+"}, name="person_show_profile")
+	 * @Method({"GET"})
+	 */
+	public function showAction($id = null )
 	{
-		return ['name' => $profile->getName()];
+		$em = $this->getDoctrine()->getManager();
+		$profile = $em->getRepository("AppBundle:Profile")->getPersonProfile();
+		
+		return $this->render('front/profile/show.html.twig', array(
+			'profile' => $profile,
+		));
 	}
 }

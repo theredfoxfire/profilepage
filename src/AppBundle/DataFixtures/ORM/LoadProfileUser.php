@@ -2,9 +2,9 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\User;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use AppBundle\Entity\ProfileUser;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -13,23 +13,32 @@ class LoadProfileUser implements FixtureInterface, ContainerAwareInterface
 	private $container;
 	
 	public function setContainer(ContainerInterface $container = null)
-	{
-		$this->container = $container;
-	}
+    {
+        $this->container = $container;
+    }
 	
 	public function load(ObjectManager $manager)
 	{
-		$pm = new ProfileUser('superadmin');
-		$pm->setPassword($this->encodePassword($pm, 'superadmin'));
-		$manager->persist($pm);
-		
-		$manager->flush();
+		$this->loadUsers($manager);
 	}
 	
-	private function encodePassword($user, $plainPassword)
-	{
-		$encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
-		
-		return $encoder->encodePassword($plainPassword, $user->getSalt());
-	}
+    private function loadUsers(ObjectManager $manager)
+    {
+        $johnUser = new User();
+        $factory = $this->container->get('security.encoder_factory');
+        $encoder = $factory->getEncoder($johnUser);
+        $johnUser->setUsername('user');
+        $encodedPassword = $encoder->encodePassword('kitten', $johnUser->getSalt());
+        $johnUser->setPassword($encodedPassword);
+        $manager->persist($johnUser);
+
+        $annaAdmin = new User();
+        $annaAdmin->setUsername('admin');
+        $annaAdmin->setRoles(array('ROLE_ADMIN'));
+        $encodedPassword = $encoder->encodePassword('kitten', $johnUser->getSalt());
+        $annaAdmin->setPassword($encodedPassword);
+        $manager->persist($annaAdmin);
+
+        $manager->flush();
+    }
 }
