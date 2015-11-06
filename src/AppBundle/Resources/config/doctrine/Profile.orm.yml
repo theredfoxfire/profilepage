@@ -1,0 +1,19 @@
+AppBundle\Entity\Profile:
+ type: entity
+ table: profile
+ id:
+  id:
+   type: integer
+   generator: { strategy: AUTO }
+ fields:
+  name:
+   type: string
+   length: 255
+   nullable: true
+ oneToOne:
+  user:
+   targetEntity: User
+   inversedBy: profile
+   joinColumn:
+    name: user_id
+    referencedColumnName: id

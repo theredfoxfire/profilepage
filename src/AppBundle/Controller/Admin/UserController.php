@@ -11,7 +11,7 @@ use AppBundle\Entity\User;
 class UserController extends Controller
 {
 	/**
-	 * @Route("/admin/list/user", name="list_user")
+	 * @Route("/admin/list/user", name="user_list")
 	 * @Method({"GET"})
 	 */
 	public function listUser()

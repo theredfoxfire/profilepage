@@ -1,22 +1,13 @@
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=2">
-	<title>Profile Dosen & Karyawan STKIP Surya</title>
-	<link href="{{ asset('bundles/profile/css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{{ asset('bundles/profile/css/font-awesome.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{{ asset('bundles/profile/css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
-</head>
-<body>
+{% extends 'base.html.twig' %}
+{% block body %}
 <div class="container">
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text">
                             <h1>Profile Dosen & Karyawan <br>STKIP SURYA</h1>
                             <div class="description">
-                            	<p>
+                            	<h4>
 	                            	List data profile Dosen dan Karyawan STKIP SURYA
-                            	</p>
+                            	</h4>
                             </div>
                         </div>
                     </div>
@@ -26,11 +17,8 @@
                         	{% if error %}
 								<div class='text-center alert alert-danger'><b>{{ error.messageKey|trans(error.messageData, 'security') }}</b></div>
 							{% endif %}
-                        		<div class="form-top-left">
-                            		<p><h4>Masukan Username dan Password Anda:</h4></p>
-                        		</div>
-                        		<div class="form-top-right">
-                        			<i class="fa fa-lock"></i>
+                        		<div class="text-center">
+                        			<h1><i class="fa fa-lock"></i></h1>
                         		</div>
                             </div>
                             <div class="form-bottom">
@@ -50,5 +38,4 @@
                         </div>
                     </div>
                  </div>
-</body>
-</html>
+{% endblock %}

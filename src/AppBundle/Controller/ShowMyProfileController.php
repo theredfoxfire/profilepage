@@ -24,7 +24,7 @@ class ShowMyProfileController extends Controller
 		$listPerson = $em->getRepository("AppBundle:User")->getPersonList();
 		
 		return $this->render('front/profile/list.html.twig', array(
-			'listPerson' => $listPerson,
+			'persons' => $listPerson,
 		));
 	}
 	

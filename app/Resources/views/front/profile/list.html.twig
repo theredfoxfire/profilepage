@@ -6,25 +6,46 @@
                         <div class="col-sm-8 col-sm-offset-2 text">
                             <h1>Profile Dosen & Karyawan <br>STKIP SURYA</h1>
                             <div class="description">
-                            	<p>
+                            	<h4>
 	                            	List data profile Dosen dan Karyawan STKIP SURYA
-                            	</p>
+                            	</h4>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3 form-box">
-                        	<div class="form-top">
-                        		<div class="form-top-left">
-                            		<p><h4>Masukan Username dan Password Anda:</h4></p>
-                        		</div>
-                        		<div class="form-top-right">
-                        			<i class="fa fa-lock"></i>
-                        		</div>
-                            </div>
-                            <div class="form-bottom">
-		                    </div>
-                        </div>
-                    </div>
-                 </div>
+ </div>
+ <div id="portfolio" class="gallery">
+		<div class="container">
+				<script src="{{ asset('bundles/profile/js/jquery.chocolat.js') }}" type="text/javascript"></script>
+				<script src="{{ asset('bundles/profile/js/modernizr.custom.97074.js') }}" type="text/javascript"></script>
+			
+			<!--light-box-files -->
+			<script type="text/javascript">
+			$(function() {
+				$('.gallery a').Chocolat();
+			});
+			</script>
+			<section>
+				<ul id="da-thumbs" class="da-thumbs">
+				{% for person in persons %}
+					<li>
+						<a href="images/a1.jpg" class="b-link-stripe b-animate-go thickbox img-thumbnail">
+							<img src="{{ asset('images/dosen/risma.jpg') }}" alt="" />
+							<div>
+								
+								<h5>{{ person.profile.name }}</h5>
+								<h6>Dosen Fisika</h6>
+							</div>
+						</a>
+					</li>
+				{% endfor %}
+				</ul>
+			</section>
+				<script src="{{ asset('bundles/profile/js/jquery.hoverdir.js') }}" type="text/javascript"></script>
+				<script type="text/javascript">
+					$(function() {
+						$('#da-thumbs > li').each( function() { $(this).hoverdir(); } );
+					});
+				</script>
+        </div>
+</div>
 {% endblock %}
