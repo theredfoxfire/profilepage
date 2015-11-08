@@ -17,18 +17,11 @@
 		<div class="container">
 				<script src="{{ asset('bundles/profile/js/jquery.chocolat.js') }}" type="text/javascript"></script>
 				<script src="{{ asset('bundles/profile/js/modernizr.custom.97074.js') }}" type="text/javascript"></script>
-			
-			<!--light-box-files -->
-			<script type="text/javascript">
-			$(function() {
-				$('.gallery a').Chocolat();
-			});
-			</script>
 			<section>
 				<ul id="da-thumbs" class="da-thumbs">
 				{% for person in persons %}
 					<li>
-						<a href="images/a1.jpg" class="b-link-stripe b-animate-go thickbox img-thumbnail">
+						<a href="{{ path('person_show_profile', {'id': person.profile.id}) }}" class=" b-animate-go thickbox img-thumbnail">
 							<img src="{{ asset('images/dosen/risma.jpg') }}" alt="" />
 							<div>
 								

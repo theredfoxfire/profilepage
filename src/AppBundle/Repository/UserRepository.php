@@ -14,10 +14,11 @@ class UserRepository extends EntityRepository
 {
 	public function getPersonList()
 	{
-		return $this->
-		createQueryBuilder('p')
-		->select('p')
-		->orderBy('p.username')
+		return $this->getEntityManager()
+		->createQueryBuilder()
+		->from('AppBundle\Entity\User', 'u')
+		->select('u')
+		->orderBy('u.username')
 		->getQuery()
 		->getResult();
 	}

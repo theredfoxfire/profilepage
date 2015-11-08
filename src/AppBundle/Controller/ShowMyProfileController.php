@@ -35,7 +35,7 @@ class ShowMyProfileController extends Controller
 	public function showAction($id = null )
 	{
 		$em = $this->getDoctrine()->getManager();
-		$profile = $em->getRepository("AppBundle:Profile")->getPersonProfile();
+		$profile = $em->getRepository("AppBundle:Profile")->findOneById($id);
 		
 		return $this->render('front/profile/show.html.twig', array(
 			'profile' => $profile,

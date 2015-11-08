@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Admin;
 
 use AppBundle\Form\ProfileType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -33,26 +34,31 @@ class ProfileController extends Controller
 	}
 	
 	/**
-	 * @Route("/user/profile/edit/{id}", requirements={"id" = "\d+"}, name="user_profile_edit");
+	 * @Route("/user/profile/edit", name="user_profile_edit");
 	 * @Method({"GET", "POST"})
 	 */
-	public function editAction($id, Request $request)
+	public function editAction(Request $request)
 	{
 		if (null === $this->getUser()) {
 			throw $this->createAccessDeniedException("Silahkan login terlebih dahulu untuk mengedit.");
 		}
 		
 		$em = $this->getDoctrine()->getManager();
-		$profile = $em->getRepository('AppBundle:Profile')->findOneById($id);
 		
-		$editForm = $this->createForm(new ProfileType(), $profile);
+		$profile = $em->getRepository('AppBundle:Profile')->findOneByUser($this->getUser());
+		
+		$editForm = $this->createForm(new ProfileType(), $profile, array(
+			'method' => 'POST'
+		));
 		
 		$editForm->handleRequest($request);
 		
 		if ($editForm->isSubmitted() && $editForm->isValid()) {
 			$em->flush();
 			
-			return $this->redirect($this->generateUrl('user_home'));
+			$this->get('session')->getFlashBag()->add('notice', 'Data berhasil diupdate!');
+			
+			return $this->redirect($this->generateUrl('user_profile_edit'));
 		}
 		
 		return $this->render('admin/profile/edit.html.twig', array(

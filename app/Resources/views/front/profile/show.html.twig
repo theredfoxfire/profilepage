@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+	<div class="col-sm-3 col-md-2 sidebar">
+			 <div class="details">
+			 <br>
+				 <h3>{{ profile.name }}</h3> 
+				 <img src="{{ asset('images/dosen/risma.jpg') }}" alt=""/>
+			 </div>
+			<div class="details">
+				<address>
+				 <h3>PHONE</h3>
+				 <span>+00 234 56 789</span>
+				 </address>
+				 <address>
+				<h3>EMAIL</h3>
+				<span>mail@example.com</span>
+				</address>
+				 <address>
+				 <h3>ADDRESS</h3>
+				 <span>Lorem ipsum,</span>
+				 <span>Sed dolor sit,</span>
+				 <span>Praesent porta.</span>
+				 </address>
+				 
+			</div>
+			<div class="clearfix"></div>
+	</div>
+	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main text-left">
+		 <div class="content">
+			 <div class="company">
+				 <h3 class="clr1">Previous Employment</h3>
+				 <div class="company_details">
+					 <h4>Company Name <span>JUNE 2009 - PRESENT</span></h4>
+					 <h6>WEB DESIGNER</h6>
+					 <p class="cmpny1">Nulla volutpat at est sed ultricies. In ac sem consequat, posuere nulla varius, molestie lorem. Duis quis nibh leo.
+					 Curabitur a quam eu mi convallis auctor nec id mauris. Nullam mattis turpis eu turpis tincidunt, et pellentesque leo imperdiet.
+					 Vivamus malesuada, sem laoreet dictum pulvinar, orci lectus rhoncus sapien, ut consectetur augue nibh in neque. In tincidunt sed enim et tincidunt.</p>
+				 </div>
+				 <div class="company_details">
+					 <h4>Company Name <span>NOVEMBER 2007 - MAY 2009</span></h4>
+					 <h6>WEB DESIGNER</h6>
+					 <p>Nulla volutpat at est sed ultricies. In ac sem consequat, posuere nulla varius, molestie lorem. Duis quis nibh leo.
+					 Curabitur a quam eu mi convallis auctor nec id mauris. Nullam mattis turpis eu turpis tincidunt, et pellentesque leo imperdiet.
+					 Vivamus malesuada, sem laoreet dictum pulvinar, orci lectus rhoncus sapien, ut consectetur augue nibh in neque. In tincidunt sed enim et tincidunt.</p>
+				 </div>
+			 </div>
+			 <div class="skills">
+				 <h3 class="clr2">Professional skills</h3>
+				 <div class="skill_info">
+				 <p>Duis egestas tortor metus, vitae venenatis tortor tristique at. Pellentesque dignissim purus vitae enim blandit, sed tristique enim malesuada. Maecenas dolor erat,
+				 volutpat a tellus eu, euismod iaculis urna. Nulla dui purus, viverra viverra dolor non, malesuada dictum purus.</p>
+				 </div>
+				 <div class="skill_list">
+					 <div class="skill1">
+						 <h4>Software</h4>
+						 <ul>					 
+							<li>Photoshop</li>
+							<li>Flash</li>
+							<li> Dreamweaver</li>
+							<li>In Design</li>
+						 </ul>
+					 </div>
+					 <div class="skill2">
+						 <h4>Languages</h4>
+						 <ul>					 
+							<li>HTML/CSS</li>
+							<li>ActionScript</li>
+							<li>PHP</li>
+							<li>Ruby on Rails</li>
+						 </ul>
+					 </div>
+					 <div class="clearfix"></div>
+				 </div>
+			 </div>
+			 <div class="education">
+				 <h3 class="clr3">Education</h3>
+				 <div class="education_details">
+					 <h4>University of Awesome<span>JANUARY 2004 - OCTOBER 2009</span></h4>
+					 <h6>MAJOR PHD</h6>
+					 <p class="cmpny1">Nulla volutpat at est sed ultricies. In ac sem consequat, posuere nulla varius, molestie lorem. Duis quis nibh leo.
+					 Curabitur a quam eu mi convallis auctor nec id mauris. Nullam mattis turpis eu turpis tincidunt, et pellentesque leo imperdiet.
+					 Vivamus malesuada, sem laoreet dictum pulvinar, orci lectus rhoncus sapien, ut consectetur augue nibh in neque. In tincidunt sed enim et tincidunt.</p>
+				 </div>
+				 <div class="education_details">
+					 <h4>University of Technology, Newyork <span>APRIL 2001 - SEPTEMBER 2003</span></h4>
+					 <h6>BACHELORS OF ARTS</h6>
+					 <p>Nulla volutpat at est sed ultricies. In ac sem consequat, posuere nulla varius, molestie lorem. Duis quis nibh leo.
+					 Curabitur a quam eu mi convallis auctor nec id mauris. Nullam mattis turpis eu turpis tincidunt, et pellentesque leo imperdiet.
+					 Vivamus malesuada, sem laoreet dictum pulvinar, orci lectus rhoncus sapien, ut consectetur augue nibh in neque. In tincidunt sed enim et tincidunt.</p>
+				 </div>
+			 </div>
+		 </div>
+	</div>
+</div>
+{% endblock %}

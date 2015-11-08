@@ -12,7 +12,7 @@ class ProfileType extends AbstractType
 	{
 		$builder->add('name', 'text', array(
 			'label' => false,
-			'attr' => array('placeholder' => 'Nama Lengkap'),
+			'attr' => array('placeholder' => 'Nama Lengkap', 'class' => 'form-control'),
 		));
 	}
 	
