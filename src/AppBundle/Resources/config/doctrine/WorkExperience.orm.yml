@@ -17,11 +17,10 @@ AppBundle\Entity\WorkExperience:
    type: text
    nullable: true
   syear:
-   type: string
-   length: 15
+   type: date
    nullable: true
   eyear:
-   type: string
+   type: date
    length: 15
    nullable: true
  manyToOne:

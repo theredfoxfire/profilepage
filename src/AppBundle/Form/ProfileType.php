@@ -13,7 +13,46 @@ class ProfileType extends AbstractType
 		$builder->add('name', 'text', array(
 			'label' => false,
 			'attr' => array('placeholder' => 'Nama Lengkap', 'class' => 'form-control'),
-		));
+		))
+		->add('pob', 'text', array(
+			'label' => false,
+			'required' => false,
+			'attr' => array('placeholder' => 'Tempat kelahiran', 'class' => 'form-control'),
+		))
+		->add('email', 'email', array(
+			'label' => false,
+			'required' => false,
+			'attr' => array('placeholder' => 'Alamat email', 'class' => 'form-control'),
+		))
+		->add('dob', 'date', array(
+			'label' => false,
+			'required' => false,
+			'widget' => 'single_text',
+			'format' => 'dd-MM-yyyy',
+			'attr' => array('placeholder' => 'Tanggal lahir', 'class' => 'form-control birth-date', 'readonly' =>true),
+		))
+		->add('phone', 'text', array(
+			'label' => false,
+			'required' => false,
+			'attr' => array('placeholder' => 'Nomor Telephone atau Hp', 'class' => 'form-control'),
+		))
+		->add('address', 'textarea', array(
+			'label' => false,
+			'required' => false,
+			'attr' => array('placeholder' => 'Alamat tinggal', 'class' => 'form-control'),
+		))
+		->add('about', 'textarea', array(
+			'label' => false,
+			'required' => false,
+			'attr' => array('placeholder' => 'Sekilas tentang Anda', 'class' => 'form-control'),
+		))
+		->add('expertise', 'hidden', array(
+			'label' => false,
+			'required' => false,
+			'attr' => array('placeholder' => 'Minat & Keahlian', 'class' => 'form-control',),
+		))
+		;
+		
 	}
 	
 	public function configureOptions(OptionsResolver $resolver)

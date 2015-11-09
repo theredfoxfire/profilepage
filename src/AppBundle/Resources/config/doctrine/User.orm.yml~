@@ -25,12 +25,12 @@ AppBundle\Entity\User:
  oneToMany:
   education:
    targetEntity: Education
-   mappedBy: user
+   mappedBy: profile
   url:
    targetEntity: Url
-   mappedBy: user
+   mappedBy: profile
   workexperience:
    targetEntity: WorkExperience
-   mappedBy: user
+   mappedBy: profile
  #lifecycleCallbacks:
   #prePersist: [ setSaltValue ]

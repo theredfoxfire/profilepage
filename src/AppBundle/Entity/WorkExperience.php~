@@ -164,4 +164,32 @@ class WorkExperience
     {
         return $this->user;
     }
+    /**
+     * @var string
+     */
+    private $about;
+
+
+    /**
+     * Set about
+     *
+     * @param string $about
+     * @return WorkExperience
+     */
+    public function setAbout($about)
+    {
+        $this->about = $about;
+
+        return $this;
+    }
+
+    /**
+     * Get about
+     *
+     * @return string 
+     */
+    public function getAbout()
+    {
+        return $this->about;
+    }
 }
