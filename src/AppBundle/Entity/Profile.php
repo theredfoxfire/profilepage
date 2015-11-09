@@ -80,4 +80,200 @@ class Profile
     {
         return $this->user;
     }
+    /**
+     * @var string
+     */
+    private $pob;
+
+    /**
+     * @var \DateTime
+     */
+    private $dob;
+
+    /**
+     * @var string
+     */
+    private $phone;
+
+    /**
+     * @var string
+     */
+    private $address;
+
+    /**
+     * @var string
+     */
+    private $foto;
+
+    /**
+     * @var string
+     */
+    private $about;
+
+    /**
+     * @var string
+     */
+    private $expertise;
+
+
+    /**
+     * Set pob
+     *
+     * @param string $pob
+     * @return Profile
+     */
+    public function setPob($pob)
+    {
+        $this->pob = $pob;
+
+        return $this;
+    }
+
+    /**
+     * Get pob
+     *
+     * @return string 
+     */
+    public function getPob()
+    {
+        return $this->pob;
+    }
+
+    /**
+     * Set dob
+     *
+     * @param \DateTime $dob
+     * @return Profile
+     */
+    public function setDob($dob)
+    {
+        $this->dob = $dob;
+
+        return $this;
+    }
+
+    /**
+     * Get dob
+     *
+     * @return \DateTime 
+     */
+    public function getDob()
+    {
+        return $this->dob;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return Profile
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return Profile
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set foto
+     *
+     * @param string $foto
+     * @return Profile
+     */
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
+
+        return $this;
+    }
+
+    /**
+     * Get foto
+     *
+     * @return string 
+     */
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+
+    /**
+     * Set about
+     *
+     * @param string $about
+     * @return Profile
+     */
+    public function setAbout($about)
+    {
+        $this->about = $about;
+
+        return $this;
+    }
+
+    /**
+     * Get about
+     *
+     * @return string 
+     */
+    public function getAbout()
+    {
+        return $this->about;
+    }
+
+    /**
+     * Set expertise
+     *
+     * @param string $expertise
+     * @return Profile
+     */
+    public function setExpertise($expertise)
+    {
+        $this->expertise = $expertise;
+
+        return $this;
+    }
+
+    /**
+     * Get expertise
+     *
+     * @return string 
+     */
+    public function getExpertise()
+    {
+        return $this->expertise;
+    }
 }

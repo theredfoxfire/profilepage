@@ -1,0 +1,33 @@
+AppBundle\Entity\WorkExperience:
+ type: entity
+ table: work_experience
+ repositoryClass: AppBundle\Repository\WorkExperienceRepository
+ id:
+  id:
+   type: integer
+   generator: { strategy: AUTO }
+ fields:
+  company:
+   type: string
+   nullable: true
+  position:
+   type: string
+   nullable: true
+  about:
+   type: text
+   nullable: true
+  syear:
+   type: string
+   length: 15
+   nullable: true
+  eyear:
+   type: string
+   length: 15
+   nullable: true
+ manyToOne:
+  user:
+   targetEntity: User
+   inversedBy: workexperience
+   joinColumn:
+    name: user_id
+    referencedColumnName: id

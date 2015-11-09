@@ -1,0 +1,28 @@
+AppBundle\Entity\Education:
+ type: entity
+ table: education
+ repositoryClass: AppBundle\Repository\EducationRepository
+ id:
+  id:
+   type: integer
+   generator: { strategy: AUTO }
+ fields:
+  institution:
+   type: string
+   nullable: true
+  level:
+   type: string
+   nullable: true
+  syear:
+   type: date
+   nullable: true
+  eyear:
+   type: date
+   nullable: true
+ manyToOne:
+  user:
+   targetEntity: User
+   inversedBy: education
+   joinColumn:
+    name: user_id
+    referencedColumnName: id

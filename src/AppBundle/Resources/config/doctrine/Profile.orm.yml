@@ -11,6 +11,28 @@ AppBundle\Entity\Profile:
    type: string
    length: 255
    nullable: true
+  pob:
+   type: string
+   nullable: true
+  dob:
+   type: date
+   nullable: true
+  phone:
+   type: string
+   length: 20
+   nullable: true
+  address:
+   type: text
+   nullable: true
+  foto:
+   type: string
+   nullable: true
+  about:
+   type: text
+   nullable: true
+  expertise:
+   type: text
+   nullable: true
  oneToOne:
   user:
    targetEntity: User

@@ -181,4 +181,118 @@ class User implements UserInterface
 
         return $this;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $education;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $url;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $workexperience;
+
+
+    /**
+     * Add education
+     *
+     * @param \AppBundle\Entity\Education $education
+     * @return User
+     */
+    public function addEducation(\AppBundle\Entity\Education $education)
+    {
+        $this->education[] = $education;
+
+        return $this;
+    }
+
+    /**
+     * Remove education
+     *
+     * @param \AppBundle\Entity\Education $education
+     */
+    public function removeEducation(\AppBundle\Entity\Education $education)
+    {
+        $this->education->removeElement($education);
+    }
+
+    /**
+     * Get education
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEducation()
+    {
+        return $this->education;
+    }
+
+    /**
+     * Add url
+     *
+     * @param \AppBundle\Entity\Url $url
+     * @return User
+     */
+    public function addUrl(\AppBundle\Entity\Url $url)
+    {
+        $this->url[] = $url;
+
+        return $this;
+    }
+
+    /**
+     * Remove url
+     *
+     * @param \AppBundle\Entity\Url $url
+     */
+    public function removeUrl(\AppBundle\Entity\Url $url)
+    {
+        $this->url->removeElement($url);
+    }
+
+    /**
+     * Get url
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Add workexperience
+     *
+     * @param \AppBundle\Entity\WorkExperience $workexperience
+     * @return User
+     */
+    public function addWorkexperience(\AppBundle\Entity\WorkExperience $workexperience)
+    {
+        $this->workexperience[] = $workexperience;
+
+        return $this;
+    }
+
+    /**
+     * Remove workexperience
+     *
+     * @param \AppBundle\Entity\WorkExperience $workexperience
+     */
+    public function removeWorkexperience(\AppBundle\Entity\WorkExperience $workexperience)
+    {
+        $this->workexperience->removeElement($workexperience);
+    }
+
+    /**
+     * Get workexperience
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkexperience()
+    {
+        return $this->workexperience;
+    }
 }
