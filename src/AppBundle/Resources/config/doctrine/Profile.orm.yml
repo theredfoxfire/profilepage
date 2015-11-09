@@ -43,3 +43,8 @@ AppBundle\Entity\Profile:
    joinColumn:
     name: user_id
     referencedColumnName: id
+ lifecycleCallbacks:
+  prePersist: [ preUpload ]
+  preUpdate: [ removeUploaded, preUpload ]
+  postPersist: [ upload ]
+  postUpdate: [ upload ]

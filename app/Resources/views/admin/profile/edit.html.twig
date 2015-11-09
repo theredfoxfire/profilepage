@@ -168,9 +168,9 @@
 				<ul class="list-group text-left">
 					<li class="list-group-item">Nama Perusahaan: {{ work.company }}</li>
 					<li class="list-group-item">Posisi atau Jabatan: {{ work.position }}</li>
-					<li class="list-group-item">Posisi atau Jabatan: {{ work.about }}</li>
+					<li class="list-group-item">Deskripsi Pekerjaan: {{ work.about }}</li>
 					<li class="list-group-item">Tahun Masuk: {{ work.syear|date('d-m-Y') }}</li>
-					<li class="list-group-item">Tahun Selesai: {{ work.eyear|date('d-m-Y') }}</li>
+					<li class="list-group-item">Tahun Keluar: {{ work.eyear|date('d-m-Y') }}</li>
 				</ul>
 				<div class="panel-body edu-strip">
 				</div>
@@ -180,7 +180,6 @@
 				<div class="panel-body edu-strip">Data Pengalaman Kerja Masih Kosong</div>
 			{% endif %}
 		</div>
-      
     </div>
     <div id="menu2" class="tab-pane fade">
       <h3>Minat & Keahlian</h3>
@@ -221,6 +220,29 @@
 		{{ form_row(url._token) }}
 		{{ form_end(url) }}
       </div>
+      <br>
+		  <hr>
+		  <div class="panel panel-info">
+		  <div class="panel-heading"><h3>Daftar Video</h3></div>
+		  {% set i = 0 %}
+		  {% for url in app.user.url %}
+				<ul class="list-group text-left">
+					<li class="list-group-item">Judul: {{ url.title }}</li>
+					<li class="list-group-item">Video: {{ url.url }}</li>
+					<!--<li class="list-group-item">
+					<div class="embed-responsive embed-responsive-16by9">
+					  <iframe class="embed-responsive-item" src="{{ url.url }}"></iframe>
+					</div>
+					</li>-->
+				</ul>
+				<div class="panel-body edu-strip">
+				</div>
+			{% set i = i + 1 %}
+			{% endfor %}
+			{% if i == 0 %}
+				<div class="panel-body edu-strip">Data Video Masih Kosong</div>
+			{% endif %}
+		</div>
     </div>
   </div>
 </div>

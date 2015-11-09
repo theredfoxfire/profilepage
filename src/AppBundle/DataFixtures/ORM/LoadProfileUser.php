@@ -29,12 +29,14 @@ class LoadProfileUser implements FixtureInterface, ContainerAwareInterface
         $factory = $this->container->get('security.encoder_factory');
         $encoder = $factory->getEncoder($johnUser);
         $johnUser->setUsername('user');
+        $johnUser->setIsActive(true);
         $encodedPassword = $encoder->encodePassword('12345', $johnUser->getSalt());
         $johnUser->setPassword($encodedPassword);
         $manager->persist($johnUser);
 
         $annaAdmin = new User();
         $annaAdmin->setUsername('admin');
+        $annaAdmin->setIsActive(true);
         $annaAdmin->setRoles(array('ROLE_ADMIN'));
         $encodedPassword = $encoder->encodePassword('12345', $annaAdmin->getSalt());
         $annaAdmin->setPassword($encodedPassword);

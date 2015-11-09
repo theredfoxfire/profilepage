@@ -71,6 +71,8 @@ class Url
      */
     public function setUrl($url)
     {
+		$url = explode('=', $url);
+		$url = 'https://www.youtube.com/embed/'.$url[1];
         $this->url = $url;
 
         return $this;

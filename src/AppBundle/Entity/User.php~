@@ -4,12 +4,12 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * User
  */
-class User implements UserInterface
+class User implements AdvancedUserInterface, \Serializable
 {
     /**
      * @var integer
@@ -294,5 +294,76 @@ class User implements UserInterface
     public function getWorkexperience()
     {
         return $this->workexperience;
+    }
+    /**
+     * @var boolean
+     */
+    private $is_active;
+
+
+    /**
+     * Set is_active
+     *
+     * @param boolean $isActive
+     * @return User
+     */
+    public function setIsActive($isActive)
+    {
+        $this->is_active = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get is_active
+     *
+     * @return boolean 
+     */
+    public function getIsActive()
+    {
+        return $this->is_active;
+    }
+    
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->is_active;
+    }
+    
+    public function serialize()
+    {
+        return serialize(array(
+			$this->id,
+			$this->roles,
+			$this->username,
+			$this->password,
+			$this->salt,
+            $this->is_active
+        ));
+    }
+    public function unserialize($serialized)
+    {
+        list (
+			$this->id,
+			$this->roles,
+			$this->username,
+			$this->password,
+			$this->salt,
+            $this->is_active
+        ) = unserialize($serialized);
     }
 }

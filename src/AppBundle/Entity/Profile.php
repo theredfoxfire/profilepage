@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Gregwar\Image\Image;
 /**
  * Profile
  */
@@ -18,6 +18,11 @@ class Profile
      * @var string
      */
     private $name;
+    
+    /**
+     * @var string
+     */
+    private $file;
 
     /**
      * @var \AppBundle\Entity\User
@@ -303,5 +308,52 @@ class Profile
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function preUpload()
+    {
+        // Add your code here
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function removeUploaded()
+    {
+        // Add your code here
+    }
+
+    /**
+     * @ORM\PostPersist
+     */
+    public function upload()
+    {
+        // Add your code here
+    }
+    
+    /**
+     * Set file
+     *
+     * @param string $file
+     * @return Profile
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }

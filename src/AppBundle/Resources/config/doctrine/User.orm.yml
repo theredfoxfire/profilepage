@@ -18,6 +18,9 @@ AppBundle\Entity\User:
    type: string
   salt:
    type: string
+  is_active:
+   type: boolean
+   default: true
  oneToOne:
   profile:
    targetEntity: Profile
