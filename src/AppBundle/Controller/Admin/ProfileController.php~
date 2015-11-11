@@ -8,6 +8,8 @@ use AppBundle\Form\UrlType;
 use AppBundle\Form\EducationType;
 use AppBundle\Form\WorkExperienceType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -17,7 +19,6 @@ use AppBundle\Entity\Profile;
 use AppBundle\Entity\Url;
 use AppBundle\Entity\Education;
 use AppBundle\Entity\WorkExperience;
-use Gregwar\Image\Image;
 
 
 class ProfileController extends Controller
@@ -60,7 +61,7 @@ class ProfileController extends Controller
 		$url = new Url();
 		
 		$editForm = $this->createForm(new ProfileType(), $profile, array(
-			'method' => 'POST',
+			'method' => 'POST'
 		));
 		$minatForm = $this->createForm(new MinatType(), $profile, array(
 			'method' => 'POST'
@@ -82,25 +83,6 @@ class ProfileController extends Controller
 		$urlForm->handleRequest($request);
 		
 		if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $file = $profile->getFile();
-            if (!empty($file)) {
-				$dir = $this->container->getParameter('kernel.root_dir').'/../web/images/dosen';
-				if (!empty($profile->getFoto())) {
-					unlink($dir.'/'.$profile->getFoto());
-				}
-				
-				$fileName = md5(uniqid()).'.'.$file->guessExtension();
-				$fileName1 = md5(uniqid()).'awal.'.$file->guessExtension();
-				
-				$file->move($dir, $fileName1);
-				Image::open($dir.'/'.$fileName1)
-					->scaleResize(320, 320, $background = 0xffffff)
-					->save($dir.'/'.$fileName);
-				unlink($dir.'/'.$fileName1);
-				$profile->setFoto($fileName);
-			}
-			
-			$em->persist($profile);
 			$em->flush();
 			
 			$this->get('session')->getFlashBag()->add('notice', 'Data berhasil diupdate!');

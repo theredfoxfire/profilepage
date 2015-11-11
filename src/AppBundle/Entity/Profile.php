@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gregwar\Image\Image;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Profile
  */
@@ -21,6 +21,7 @@ class Profile
     
     /**
      * @var string
+     * @Assert\File(mimeTypes={ "image/jpeg" })
      */
     private $file;
 
@@ -308,30 +309,6 @@ class Profile
     public function getEmail()
     {
         return $this->email;
-    }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function preUpload()
-    {
-        // Add your code here
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function removeUploaded()
-    {
-        // Add your code here
-    }
-
-    /**
-     * @ORM\PostPersist
-     */
-    public function upload()
-    {
-        // Add your code here
     }
     
     /**

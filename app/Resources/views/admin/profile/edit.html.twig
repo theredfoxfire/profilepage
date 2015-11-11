@@ -23,9 +23,18 @@
     <div id="home" class="tab-pane fade in active">
       <h3>Data Personal</h3>
       <p>Deskrpsikan tentang Anda, agar orang lain dapat mengenal siapa Anda.</p>
+      {% if profile.foto %}
+			<img src="{{ asset('images/dosen/') }}{{ profile.foto }}" class="img img-responsive img-thumbnail">
+      {% endif %}
+      <br><hr>
       <div class="text-left">
       {{ form_start(form) }}
 						{{ form_errors(form) }}
+								<div class="form-group">
+									<label>Foto Profile (jika foto tidak ingin diupdate, biarkan kosong):</label>
+									{{ form_widget(form.file) }}
+									{{ form_errors(form.file) }}
+								</div>
 								<div class="form-group">
 								<label for="exampleInputEmail1">Nama Lengkap:</label>
 								{{ form_widget(form.name) }}

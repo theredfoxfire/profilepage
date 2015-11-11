@@ -51,6 +51,10 @@ class ProfileType extends AbstractType
 			'required' => false,
 			'attr' => array('placeholder' => 'Minat & Keahlian', 'class' => 'form-control',),
 		))
+		->add('file', 'file', array(
+			'label' => false,
+			'required' => false,
+		))
 		;
 		
 	}
