@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gregwar\Image\Image;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Profile
  */
@@ -18,6 +18,12 @@ class Profile
      * @var string
      */
     private $name;
+    
+    /**
+     * @var string
+     * @Assert\File(mimeTypes={ "image/jpeg" })
+     */
+    private $file;
 
     /**
      * @var \AppBundle\Entity\User
@@ -228,6 +234,9 @@ class Profile
      */
     public function getFoto()
     {
+		if (empty($this->foto)) {
+			$this->foto = 'profile.png';
+		}
         return $this->foto;
     }
 
@@ -303,5 +312,56 @@ class Profile
     public function getEmail()
     {
         return $this->email;
+    }
+    
+    /**
+     * Set file
+     *
+     * @param string $file
+     * @return Profile
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+    /**
+     * @var string
+     */
+    private $position;
+
+
+    /**
+     * Set position
+     *
+     * @param string $position
+     * @return Profile
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return string 
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 }

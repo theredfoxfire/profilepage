@@ -22,11 +22,11 @@
 				{% for person in persons %}
 					<li>
 						<a href="{{ path('person_show_profile', {'id': person.profile.id}) }}" class=" b-animate-go thickbox img-thumbnail">
-							<img src="{{ asset('images/dosen/risma.jpeg') }}" alt="" />
+							<img src="{{ asset('images/dosen/') }}{{ person.profile.foto }}" alt="" />
 							<div>
 								
 								<h5>{{ person.profile.name }}</h5>
-								<h6>Dosen Fisika</h6>
+								<h6>{{ person.profile.position }}</h6>
 							</div>
 						</a>
 					</li>

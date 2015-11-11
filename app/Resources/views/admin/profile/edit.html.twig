@@ -42,6 +42,12 @@
 								{{ form_errors(form.name) }}
 								</div>
 								<div class="form-group">
+								<label>Posisi saat ini di STKIP:</label>
+								{{ form_widget(form.position) }}
+								
+								{{ form_errors(form.position) }}
+								</div>
+								<div class="form-group">
 								<label for="exampleInputEmail1">Tempat Kelahiran:</label>
 								{{ form_widget(form.pob) }}
 								
@@ -238,11 +244,6 @@
 				<ul class="list-group text-left">
 					<li class="list-group-item">Judul: {{ url.title }}</li>
 					<li class="list-group-item">Video: {{ url.url }}</li>
-					<!--<li class="list-group-item">
-					<div class="embed-responsive embed-responsive-16by9">
-					  <iframe class="embed-responsive-item" src="{{ url.url }}"></iframe>
-					</div>
-					</li>-->
 				</ul>
 				<div class="panel-body edu-strip">
 				</div>

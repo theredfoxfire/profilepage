@@ -7,6 +7,9 @@ AppBundle\Entity\User:
    type: integer
    generator: { strategy: AUTO }
  fields:
+  is_admin:
+   type: boolean
+   nullable: true
   roles:
    type: json_array
    nullable: true
@@ -35,5 +38,3 @@ AppBundle\Entity\User:
   workexperience:
    targetEntity: WorkExperience
    mappedBy: user
- #lifecycleCallbacks:
-  #prePersist: [ setSaltValue ]

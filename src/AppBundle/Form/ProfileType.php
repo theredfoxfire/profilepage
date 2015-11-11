@@ -55,6 +55,11 @@ class ProfileType extends AbstractType
 			'label' => false,
 			'required' => false,
 		))
+		->add('position', 'text', array(
+			'label' => false,
+			'required' => false,
+			'attr' => array('class' => 'form-control')
+		))
 		;
 		
 	}

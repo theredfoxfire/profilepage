@@ -36,6 +36,9 @@ AppBundle\Entity\Profile:
   email:
    type: string
    nullable: true
+  position:
+   type: string
+   nullable: true
  oneToOne:
   user:
    targetEntity: User

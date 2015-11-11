@@ -366,4 +366,39 @@ class User implements AdvancedUserInterface, \Serializable
             $this->is_active
         ) = unserialize($serialized);
     }
+    /**
+     * @var boolean
+     */
+    private $is_admin;
+
+
+    /**
+     * Set is_admin
+     *
+     * @param boolean $isAdmin
+     * @return User
+     */
+    public function setIsAdmin($isAdmin)
+    {
+        $this->is_admin = $isAdmin;
+
+        return $this;
+    }
+
+    /**
+     * Get is_admin
+     *
+     * @return boolean 
+     */
+    public function getIsAdmin()
+    {
+        return $this->is_admin;
+    }
+    
+    protected $status;
+    
+    public function getStatus()
+    {
+		return ($this->is_active == true ? $this->status = "Aktif" : $this->status = "Tidak Aktif");
+	}
 }

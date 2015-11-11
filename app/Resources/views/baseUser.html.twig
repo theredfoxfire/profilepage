@@ -67,6 +67,7 @@
           <ul class="nav navbar-nav">
             <li><a href="{{ path('user_home') }}">Home</a></li>
             <li><a href="{{ path('user_profile_edit') }}">Profile</a></li>
+            <li><a href="{{ path('person_show_profile', {'id': app.user.profile.id}) }}" target="_blank">Preview Profile</a></li>
           </ul>
           <ul class="nav navbar-nav pull-right">
             <li><a href="{{ path('security_logout') }}">LOGOUT &nbsp;<i class="fa fa-sign-out"></i></a></li>

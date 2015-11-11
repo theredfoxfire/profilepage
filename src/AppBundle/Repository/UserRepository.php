@@ -18,6 +18,7 @@ class UserRepository extends EntityRepository
 		->createQueryBuilder()
 		->from('AppBundle\Entity\User', 'u')
 		->select('u')
+		->where('u.is_admin = :rol')->setParameter('rol',false)
 		->orderBy('u.username')
 		->getQuery()
 		->getResult();

@@ -234,6 +234,9 @@ class Profile
      */
     public function getFoto()
     {
+		if (empty($this->foto)) {
+			$this->foto = 'profile.png';
+		}
         return $this->foto;
     }
 
@@ -332,5 +335,33 @@ class Profile
     public function getFile()
     {
         return $this->file;
+    }
+    /**
+     * @var string
+     */
+    private $position;
+
+
+    /**
+     * Set position
+     *
+     * @param string $position
+     * @return Profile
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return string 
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 }
