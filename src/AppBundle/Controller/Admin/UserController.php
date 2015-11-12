@@ -8,31 +8,54 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Profile;
+use AppBundle\Form\SearchType;
 
 class UserController extends Controller
 {
 	/**
 	 * @Route("/admin/list/user", name="user_list")
-	 * @Method({"GET"})
+	 * @Method({"GET", "POST"})
 	 */
-	public function listUser()
+	public function listUser(Request $request)
 	{
 		if (null === $this->getUser()) {
 			throw $this->createAccessDeniedException('Untuk melihat list user, silahkan login terlebih dahulu.');
 		}
 		
 		$em = $this->getDoctrine()->getManager();
+		$profile = new Profile();
+		$searchForm = $this->createForm(new SearchType(), $profile, array(
+			'method' => 'POST',
+		));
+		$searchForm->handleRequest($request);
+		
+		// If submitted form run search query instead of findAll query
+		if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+			$key = $profile->getName();
+			$entities = $em->getRepository('AppBundle:User')->searchUser($key);
+			$deleteForm = array();
+			foreach ($entities as $entity) {
+				$deleteForm[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
+			}
+			
+			return $this->render('admin/user/list.html.twig', array(
+			'users' => $entities,
+			'delete' => $deleteForm,
+			'form' => $searchForm->createView(),
+		));
+		}
+		
 		$deleteForm = array();
-        $entities = $em->getRepository('AppBundle:User')->findAll();
+        $entities = $em->getRepository('AppBundle:User')->findAllUser();
         foreach ($entities as $entity) {
 			$deleteForm[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
 		}
 		
-		$listUser = $em->getRepository('AppBundle:User')->findAll();
-		
 		return $this->render('admin/user/list.html.twig', array(
-			'users' => $listUser,
+			'users' => $entities,
 			'delete' => $deleteForm,
+			'form' => $searchForm->createView(),
 		));
 	}
 	

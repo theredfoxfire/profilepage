@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Profile;
 use AppBundle\Entity\User;
+use AppBundle\Form\SearchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,15 +17,31 @@ class ShowMyProfileController extends Controller
 {
 	/**
 	 * @Route("/", name="person_list")
-	 * @Method({"GET"})
+	 * @Method({"GET", "POST"})
 	 */
-	public function listAction()
+	public function listAction(Request $request)
 	{
+		$profile = new Profile();
 		$em = $this->getDoctrine()->getManager();
 		$listPerson = $em->getRepository("AppBundle:User")->getPersonList();
+		$searchForm = $this->createForm(new SearchType(), $profile, array(
+			'method' => 'POST',
+		));
+		$searchForm->handleRequest($request);
+		
+		if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+			$key = $profile->getName();
+			$persons = $em->getRepository('AppBundle:Profile')->findPerson($key);
+			
+			return $this->render('front/profile/list.html.twig', array(
+				'persons' => $persons,
+				'form' => $searchForm->createView(),
+			));
+		}
 		
 		return $this->render('front/profile/list.html.twig', array(
 			'persons' => $listPerson,
+			'form' => $searchForm->createView(),
 		));
 	}
 	

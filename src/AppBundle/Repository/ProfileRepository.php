@@ -12,7 +12,45 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProfileRepository extends EntityRepository
 {
-	public function getPersonProfile($id = null)
+	public function findPerson($key)
 	{
+		return $this->getEntityManager()
+			->createQueryBuilder()
+			->from('AppBundle\Entity\User', 'u')
+			->select('u', 'p')
+			->join('u.profile', 'p')
+			->where('p.name like :key')->setParameter('key', '%'.$key.'%')
+			->andWhere('u.is_admin = :rol')->setParameter('rol',false)
+			->setMaxResults(75)
+			->getQuery()
+			->getResult()
+			;
+	}
+	
+	public function findPersonName($term)
+	{
+		return $this->getEntityManager()
+			->createQueryBuilder()
+			->from('AppBundle\Entity\Profile', 'p')
+			->select('p', 'u')
+			->join('p.user', 'u')
+			->where('p.name like :term')->setParameter('term', '%'.$term.'%')
+			->andWhere('u.is_admin = :rol')->setParameter('rol',false)
+			->setMaxResults(20)
+			->getQuery()
+			->getResult();
+	}
+	
+	public function findUserName($term)
+	{
+		return $this->getEntityManager()
+			->createQueryBuilder()
+			->from('AppBundle\Entity\Profile', 'p')
+			->select('p', 'u')
+			->join('p.user', 'u')
+			->where('p.name like :term')->setParameter('term', '%'.$term.'%')
+			->setMaxResults(20)
+			->getQuery()
+			->getResult();
 	}
 }

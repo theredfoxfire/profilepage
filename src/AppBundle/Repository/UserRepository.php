@@ -20,7 +20,32 @@ class UserRepository extends EntityRepository
 		->select('u')
 		->where('u.is_admin = :rol')->setParameter('rol',false)
 		->orderBy('u.username')
+		->setMaxResults(75)
 		->getQuery()
 		->getResult();
+	}
+	
+	public function findAllUser()
+	{
+		return $this->getEntityManager()
+			->createQueryBuilder()
+			->from('AppBundle\Entity\User', 'u')
+			->select('u')
+			->setMaxResults(75)
+			->getQuery()
+			->getResult();
+	}
+	
+	public function searchUser($key)
+	{
+		return $this->getEntityManager()
+			->createQueryBuilder()
+			->from('AppBundle\Entity\User', 'u')
+			->select('u', 'p')
+			->join('u.profile', 'p')
+			->where('p.name like :key')->setParameter('key', '%'.$key.'%')
+			->setMaxResults(75)
+			->getQuery()
+			->getResult();
 	}
 }

@@ -18,6 +18,8 @@ use AppBundle\Entity\Url;
 use AppBundle\Entity\Education;
 use AppBundle\Entity\WorkExperience;
 use Gregwar\Image\Image;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 class ProfileController extends Controller
@@ -155,4 +157,30 @@ class ProfileController extends Controller
 			'url' => $urlForm->createView(),
 		));
 	}
+	
+	/**
+	 * @Route("/profile/search/person", name="profile_search")
+	 * @Method("GET")
+	 */
+	public function searchAction(Request $request)
+	{
+		$names = array();
+		$term = trim(strip_tags($request->get('term')));
+		$isUser = $request->get('user');
+		
+		$em = $this->getDoctrine()->getManager();
+		if (empty($isUser)) {
+			$entities = $em->getRepository('AppBundle:Profile')->findPersonName($term);
+		} else {
+			$entities = $em->getRepository('AppBundle:Profile')->findUserName($term);
+		}
+		foreach ($entities as $entity) {
+			$names[] = $entity->getName();
+		}
+		$response = new JsonResponse();
+		$response->setData($names);
+		
+		return $response;
+	}
+	
 }

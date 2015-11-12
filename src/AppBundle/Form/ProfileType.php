@@ -10,6 +10,35 @@ class ProfileType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
+		$posisi = array(
+			"Ketua Yayasan" => "Ketua Yayasan",
+			"Ketua STKIP Surya" => "Ketua STKIP Surya",
+			"Wakil Ketua STKIP Surya" => "Wakil Ketua STKIP Surya",
+			"Ketua Prodi Matematika" => "Ketua Prodi Matematika",
+			"Ketua Prodi Fisika" => "Ketua Prodi Fisika",
+			"Ketua Prodi Kimia" => "Ketua Prodi Kimia",
+			"Ketua Prodi Teknik Informasi & Komputer" => "Ketua Prodi Teknik Informasi & Komputer",
+			"Wakil Ketua Prodi Matematika" => "Wakil Ketua Prodi Matematika",
+			"Wakil Ketua Prodi Fisika" => "Wakil Ketua Prodi Fisika",
+			"Wakil Ketua Prodi Kimia" => "Wakil Ketua Prodi Kimia",
+			"Wakil Ketua Prodi Teknik Informatika & Komputer" => "Wakil Ketua Prodi Teknik Informatika & Komputer",
+			"Kepala Staff Badan Akademik" => "Kepala Staff Badan Akademik",
+			"Kepala Staff Badan Kemahasiswaan" => "Kepala Staff Badan Kemahasiswaan",
+			"Kepala Staff Badan Keamanan" => "Kepala Staff Badan Keamanan",
+			"Kepala Staff Badan Informasi dan Telekomunikasi" => "Kepala Staff Badan Informasi dan Telekomunikasi",
+			"Dosen Pendidikan Matematika" => "Dosen Pendidikan Matematika",
+			"Dosen Pendidikan Fisika" => "Dosen Pendidikan Fisika",
+			"Dosen Pendidikan Kimia" => "Dosen Pendidikan Kimia",
+			"Dosen Pendidikan Teknik Informatika & Komputer" => "Dosen Pendidikan Teknik Informatika & Komputer",
+			"Staff Badan Akademik" => "Staff Badan Akademik",
+			"Staff Badan Kemahasiswaan" => "Staff Badan Kemahasiswaan",
+			"Staff Badan Keamanan" => "Staff Badan Keamanan",
+			"Staff Badan Informasi dan Telekomunikasi" => "Staff Badan Informasi dan Telekomunikasi",
+			"Tutor Pendidikan Matematika" => "Tutor Pendidikan Matematika",
+			"Tutor Pendidikan Fisika" => "Tutor Pendidikan Fisika",
+			"Tutor Pendidikan Kimia" => "Tutor Pendidikan Kimia",
+			"Tutor Pendidikan Teknik Informatika & Komputer" => "Tutor Pendidikan Teknik Informatika & Komputer",
+		);
 		$builder->add('name', 'text', array(
 			'label' => false,
 			'attr' => array('placeholder' => 'Nama Lengkap', 'class' => 'form-control'),
@@ -55,9 +84,11 @@ class ProfileType extends AbstractType
 			'label' => false,
 			'required' => false,
 		))
-		->add('position', 'text', array(
+		->add('position', 'choice', array(
 			'label' => false,
-			'required' => false,
+			'choices' => $posisi,
+			'required' => true,
+			'empty_value' => "--Pilih Posisi/Jabatan--",
 			'attr' => array('class' => 'form-control')
 		))
 		;

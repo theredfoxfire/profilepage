@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container">
-                    <div class="row">
+ <div id="portfolio" class="gallery">
+		<div class="container">
+		<br>
+		<div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text">
-                            <h1>Profile Dosen & Karyawan <br>STKIP SURYA</h1>
+                            <h4><b>Profile Dosen & Karyawan <br>STKIP SURYA</b></h4>
                             <div class="description">
                             	<h4>
 	                            	List data profile Dosen dan Karyawan STKIP SURYA
@@ -12,17 +14,32 @@
                             </div>
                         </div>
                     </div>
- </div>
- <div id="portfolio" class="gallery">
-		<div class="container">
+                    <br>
+                    <hr>
+					<div class="row text-left">
+					<h4>
+	                    	Cari Profile Seseorang:
+                    </h4>
+						{{ form_start(form) }}
+						{{ form_errors(form) }}
+							<div class="form-group">
+								{{ form_widget(form.name) }}
+								{{ form_errors(form.name) }}
+							</div>
+							<button type="submit" class="btn btn-primary pull-left">Temukan</button>
+						{{ form_row(form._token) }}
+						{{ form_end(form) }}
+					</div>
+					<hr>
 				<script src="{{ asset('bundles/profile/js/jquery.chocolat.js') }}" type="text/javascript"></script>
 				<script src="{{ asset('bundles/profile/js/modernizr.custom.97074.js') }}" type="text/javascript"></script>
 			<section>
-				<ul id="da-thumbs" class="da-thumbs">
+				<ul id="da-thumbs" class="da-thumbs col-md-12">
+				{% set i = 0 %}
 				{% for person in persons %}
-					<li>
+					<li class="col-md-2">
 						<a href="{{ path('person_show_profile', {'id': person.profile.id}) }}" class=" b-animate-go thickbox img-thumbnail">
-							<img src="{{ asset('images/dosen/') }}{{ person.profile.foto }}" alt="" />
+							<img src="{{ asset('images/dosen/') }}{{ person.profile.foto }}" alt="" class="img-responsive"/>
 							<div>
 								
 								<h5>{{ person.profile.name }}</h5>
@@ -30,7 +47,11 @@
 							</div>
 						</a>
 					</li>
+					{% set i = 1 %}
 				{% endfor %}
+				{% if i == 0 %}
+					<div class="alert alert-danger">Data profile yang Anda cari tidak ada, coba dengan nama lain. <a href="{{ path('person_list') }}"><button class="btn btn-warning pull-right">Back</button></a></div>
+				{% endif %}
 				</ul>
 			</section>
 				<script src="{{ asset('bundles/profile/js/jquery.hoverdir.js') }}" type="text/javascript"></script>
@@ -41,4 +62,14 @@
 				</script>
         </div>
 </div>
+<script>
+	$(function() {
+		$('#profile_search_name').autocomplete({
+			source: "{{ path('profile_search') }}",
+			minLength: 2,
+			select: function() {
+			}
+		});
+	});
+</script>
 {% endblock %}
