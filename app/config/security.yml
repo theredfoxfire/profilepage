@@ -15,7 +15,7 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        ceremony_tracker:
+        main:
             pattern:    ^/
             form_login:
                 check_path: /login_check

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+		<br>
+		<div class="col-sm-3"></div>
+		<div class="col-sm-6 text-left">
+				{% for flashMessage in app.session.flashbag.get('notice') %}
+					<div class=" alert alert-danger" id="message-session">
+					{{ flashMessage }}
+					</div>
+				{% endfor %}
+
+			<h4>Untuk Menulis Profile, Login Dengan Akun LDAP Anda</h4>
+			<hr>
+			{{ form_start(form) }}
+			{{ form_errors(form) }}
+				<div class="form-group">
+				<label>Username</label>
+					{{ form_widget(form.username) }}
+					{{ form_errors(form.username) }}
+				</div>
+				<div class="form-group">
+				<label>Password</label>
+					{{ form_widget(form.password) }}
+					{{ form_errors(form.password) }}
+				</div>
+				<button type="submit" class="btn btn-primary">LOGIN</button>
+			{{ form_row(form._token) }}
+			{{ form_end(form) }}
+			</div>
+		<div class="col-sm-3"></div>
+	</div>
+</div>
+{% endblock %}

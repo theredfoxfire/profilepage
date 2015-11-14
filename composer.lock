@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cba9040decba517bee8699ac32f5f94d",
-    "content-hash": "6b182e2f96df46c94201739b9b352797",
+    "hash": "c610325c333059f93194ba44402d9a0d",
+    "content-hash": "2e4a3ca404df03f76d202b26757a3195",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1016,65 +1016,6 @@
                 "image"
             ],
             "time": "2015-10-19 10:35:07"
-        },
-        {
-            "name": "imag/ldap-bundle",
-            "version": "dev-master",
-            "target-dir": "IMAG/LdapBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BorisMorel/LdapBundle.git",
-                "reference": "d8da84c3c7cf7b8f384cb427c8aeebfcbab7eae1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BorisMorel/LdapBundle/zipball/d8da84c3c7cf7b8f384cb427c8aeebfcbab7eae1",
-                "reference": "d8da84c3c7cf7b8f384cb427c8aeebfcbab7eae1",
-                "shasum": ""
-            },
-            "require": {
-                "ext-ldap": "*",
-                "php": ">=5.3.3",
-                "symfony/symfony": ">2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "IMAG\\LdapBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "CeCILL"
-            ],
-            "authors": [
-                {
-                    "name": "Juti Noppornpitak",
-                    "email": "jutin@nationalfibre.net",
-                    "homepage": "https://github.com/instaclick",
-                    "role": "Fork Maintainer"
-                },
-                {
-                    "name": "Shiroyuki",
-                    "homepage": "https://github.com/shiroyuki",
-                    "role": "Fork Maintainer"
-                },
-                {
-                    "name": "Boris Morel",
-                    "email": "boris.morel@imag.fr",
-                    "homepage": "https://github.com/BorisMorel",
-                    "role": "Developer"
-                },
-                {
-                    "name": "John Kary",
-                    "email": "john@johnkary.net",
-                    "homepage": "https://github.com/johnkary",
-                    "role": "Fork Maintainer"
-                }
-            ],
-            "description": "LDAP Bundle for Symfony 2",
-            "homepage": "http://github.com/BorisMorel/LdapBundle",
-            "time": "2014-10-20 14:30:19"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -2558,8 +2499,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "gregwar/image-bundle": 20,
-        "imag/ldap-bundle": 20
+        "gregwar/image-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
