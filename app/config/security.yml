@@ -19,7 +19,7 @@ security:
             pattern:    ^/
             form_login:
                 check_path: /login_check
-                login_path: /login
+                login_path: /ldap/auth
                 always_use_default_target_path: false
                 default_target_path: /user/home
             logout:

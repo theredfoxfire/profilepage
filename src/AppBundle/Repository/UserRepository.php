@@ -48,4 +48,27 @@ class UserRepository extends EntityRepository
 			->getQuery()
 			->getResult();
 	}
+	
+	public function getLogUser($user, $pass)
+	{
+		return $this->getEntityManager()
+			->createQueryBuilder()
+			->from('AppBundle\Entity\User', 'u')
+			->select('u')
+			->where('u.username = :user')->setParameter('user', $user)
+			->andWhere('u.password = :pass')->setParameter('pass', $pass)
+			->getQuery()
+			->getResult();
+	}
+	
+	public function getOne($id)
+	{
+		return $this->getEntityManager()
+			->createQueryBuilder()
+			->from('AppBundle\Entity\User', 'u')
+			->select('u')
+			->where('u.id = :id')->setParameter('id', $id)
+			->getQuery()
+			->getResult();
+	}
 }

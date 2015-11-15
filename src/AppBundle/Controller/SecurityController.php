@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Security\Core\SecurityContextInterface;
+use AppBundle\Entity\User;
+use AppBundle\Form\RegisterType;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class SecurityController extends Controller
 {
@@ -29,14 +32,24 @@ class SecurityController extends Controller
 		// last username entered by the user
 		$lastUsername = (null === $session) ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);
 
-		return $this->render(
-			'security/login.html.twig',
-			array(
-				// last username entered by the user
-				'last_username' => $lastUsername,
-				'error'         => $error,
-			)
-		);
+		//~ return $this->render(
+			//~ 'security/login.html.twig',
+			//~ array(
+				//~ // last username entered by the user
+				//~ 'last_username' => $lastUsername,
+				//~ 'error'         => $error,
+			//~ )
+		//~ );
+		
+		$user = new User();
+		$regForm = $this->createForm(new RegisterType(), $user, array(
+			'method' => 'POST',
+		));
+		$this->get('session')->getFlashBag()->add('notice', 'Login gagal, periksa kembali username & password Anda.');
+
+		return $this->render('front/user/register.html.twig', array(
+			'form' => $regForm->createView(),
+		));
     }
 
     /**

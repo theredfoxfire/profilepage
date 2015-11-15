@@ -1,0 +1,12 @@
+services:
+ pp.user_repo:
+  class:     Doctrine\Common\Persistence\ObjectRepository
+  factory_service: doctrine
+  factory_method: getRepository
+  arguments: [AppBundle:User]
+ pp.profile_repo:
+  class: Doctrine\Common\Persistence\ObjectRepository
+  factory_service: doctrine
+  factory_method: getRepository
+  arguments: [AppBundle:Profile]
+  

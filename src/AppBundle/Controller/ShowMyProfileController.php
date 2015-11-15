@@ -22,8 +22,7 @@ class ShowMyProfileController extends Controller
 	public function listAction(Request $request)
 	{
 		$profile = new Profile();
-		$em = $this->getDoctrine()->getManager();
-		$listPerson = $em->getRepository("AppBundle:User")->getPersonList();
+		$listPerson = $this->get('pp.user_repo')->getPersonList();
 		$searchForm = $this->createForm(new SearchType(), $profile, array(
 			'method' => 'POST',
 		));
@@ -31,7 +30,7 @@ class ShowMyProfileController extends Controller
 		
 		if ($searchForm->isSubmitted() && $searchForm->isValid()) {
 			$key = $profile->getName();
-			$persons = $em->getRepository('AppBundle:Profile')->findPerson($key);
+			$persons = $this->get('pp.user_repo')->findPerson($key);
 			
 			return $this->render('front/profile/list.html.twig', array(
 				'persons' => $persons,
@@ -51,8 +50,7 @@ class ShowMyProfileController extends Controller
 	 */
 	public function showAction($id = null )
 	{
-		$em = $this->getDoctrine()->getManager();
-		$profile = $em->getRepository("AppBundle:Profile")->findOneById($id);
+		$profile = $this->get('pp.profile_repo')->findOneById($id);
 		
 		return $this->render('front/profile/show.html.twig', array(
 			'profile' => $profile,

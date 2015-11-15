@@ -34,6 +34,22 @@ class LdapController extends Controller
 		if ($regForm->isSubmitted() && $regForm->isValid()) {
 			$username = $user->getUsername();
 			$password = $user->getPassword();
+			$user = $em->getRepository('AppBundle:User')->findOneByUsername($username);
+
+			if ($user) {
+				$factory = $this->get('security.encoder_factory');
+				$encoder = $factory->getEncoder($user);
+				$ep = $encoder->encodePassword($password, $user->getSalt());
+				
+				$user_log = $em->getRepository('AppBundle:User')->getLogUser($username, $ep);
+				if (!$user_log) {
+					$this->get('session')->getFlashBag()->add('notice', 'Login gagal, periksa kembali username & password Anda.');
+					return $this->redirect($this->generateUrl('ldap_register'));
+				}
+				
+				$this->authenticateUser($user);
+				return $this->redirect($this->generateUrl('user_home'));
+			}
 			
 			/**
 			 * LDAP AUTH
@@ -58,16 +74,10 @@ class LdapController extends Controller
 								if ($info['count'] == 0) {
 									$login_error_code = 4;
 								} else {
-									//~ echo "<pre>";
-									//~ print_r($info);
-									//~ blblb;
 									$BIND_username = $info[0]['distinguishedname'][0];
 									$BIND_password = $password;
 								}
-								
-								// stack with user true but err pass
-								
-								if ($r2=ldap_bind($ds,$BIND_username,$BIND_password)) {
+								if (@$r2=ldap_bind($ds,$BIND_username,$BIND_password)) {
 									if($sr2=ldap_search($ds, $LDAPContainer, $filter, array("givenName","sn","mail","displayName","department"))) {
 										if($info2 = ldap_get_entries($ds, $sr2)) {
 											if ($info2['count'] == 0) {
@@ -77,6 +87,9 @@ class LdapController extends Controller
 												$ldap_email = $info2[0]["mail"][0];						
 												$ldap_departemen = $info2[0]["department"][0];
 												$ldap_displayname = $info2[0]["displayname"][0];
+												//~ echo "<pre>";
+												//~ print_r($info[0]['distinguishedname'][0]);
+												//~ blblb;
 											}
 										} else {
 											$login_error = "Could not read entries"; $login_error_code=1;
@@ -99,6 +112,7 @@ class LdapController extends Controller
 			} else {
 				$login_error = "Could not connect"; $login_error_code=7;
 			}
+			//END OF LDAP AUTH
    
 			if($login_error_code > 0){
 				$this->get('session')->getFlashBag()->add('notice', 'Login gagal, periksa kembali username & password Anda.');
@@ -113,6 +127,7 @@ class LdapController extends Controller
 					$ep = $encoder->encodePassword($password, $new->getSalt());
 					$new->setUsername($username);
 					$new->setIsActive(true);
+					$new->setIsAdmin(false);
 					$new->setPassword($ep);
 					$em->persist($new);
 					$em->flush();
