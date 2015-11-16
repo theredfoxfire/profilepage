@@ -84,12 +84,13 @@ class LdapController extends Controller
 												$login_error_code = 4;
 											} else {
 												$ldap_name = $info2[0]["givenname"][0]." ".$info2[0]["sn"][0];
-												$ldap_email = $info2[0]["mail"][0];						
-												$ldap_departemen = $info2[0]["department"][0];
+												$ldap_email = $info2[0]["mail"][0];	
 												$ldap_displayname = $info2[0]["displayname"][0];
-												//~ echo "<pre>";
-												//~ print_r($info[0]['distinguishedname'][0]);
-												//~ blblb;
+												$ou = explode(",",$info[0]['distinguishedname'][0]);
+												$name = explode("=",$ou[0]);
+												$name = $name[1];
+												$ou = explode("=",$ou[1]);
+												$ou = $ou[1];
 											}
 										} else {
 											$login_error = "Could not read entries"; $login_error_code=1;
@@ -118,6 +119,10 @@ class LdapController extends Controller
 				$this->get('session')->getFlashBag()->add('notice', 'Login gagal, periksa kembali username & password Anda.');
 				return $this->redirect($this->generateUrl('ldap_register'));
 			} else {
+				if ($ou == 'STUDENTS' or $ou == 'SU' or $ou == 'CENTER' or $ou == 'MANAGEMENT' or $ou == 'YS-GROUP') {
+					$this->get('session')->getFlashBag()->add("notice", "Mohon maaf {$ou} tidak diperkenankan menggunkan aplikasi ini.");
+					return $this->redirect($this->generateUrl('ldap_register'));
+				}
 				$user = $em->getRepository('AppBundle:User')->findOneByUsername($username);
 				
 				if (!$user) {
@@ -137,6 +142,7 @@ class LdapController extends Controller
 					//set new Profile for new User
 					$profile = new Profile();
 					$profile->setUser($user);
+					$profile->setName($name);
 					$em->persist($profile);
 					$em->flush();
 					
