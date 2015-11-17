@@ -47,13 +47,24 @@
 					<td>
 					{% if user.isactive == true %} 
 					{{ form_start(delete[user.id], {'attr': {'onclick': 'return confirm("Yakin akan memblokir user ini?")'}}) }}
-						<button type='submit' class='btn btn-danger'><i class="fa fa-ban"></i> BLOKIR</button>
+						<button type='submit' class='btn btn-danger align-left'><i class="fa fa-ban"></i> BLOKIR</button>
 					{{ form_end(delete[user.id]) }}
 					{% else %} 
 						<a href="{{ path('user_activated', {'id': user.id}) }}">
-							<button class='btn btn-success'><i class="fa fa-check-square-o"></i> AKTIFKAN</button>
+							<button class='btn btn-success align-left'><i class="fa fa-check-square-o"></i> AKTIFKAN</button>
 						</a>
 					{% endif %}
+					{% for role in user.roles %}
+						{% if role == 'ROLE_ADMIN' %}
+							<a href="{{ path('user_downgrade', {'id': user.id}) }}">
+								<button type='submit' class='btn btn-danger align-left'><i class="fa fa-ban"></i> DOWNGRADE</button>
+							</a>
+						{% else %}
+							<a href="{{ path('user_upgrade', {'id': user.id}) }}">
+								<button class='btn btn-success'><i class="fa fa-check-square-o align-left"></i> UPGRADE</button>
+							</a>
+						{% endif %}
+					{% endfor %}
 					</td>
 				</tr>
 				{% set i = 1 %}

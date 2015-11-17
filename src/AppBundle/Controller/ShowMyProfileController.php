@@ -30,7 +30,7 @@ class ShowMyProfileController extends Controller
 		
 		if ($searchForm->isSubmitted() && $searchForm->isValid()) {
 			$key = $profile->getName();
-			$persons = $this->get('pp.user_repo')->findPerson($key);
+			$persons = $this->get('pp.profile_repo')->findPerson($key);
 			
 			return $this->render('front/profile/list.html.twig', array(
 				'persons' => $persons,

@@ -62,7 +62,7 @@ class User implements AdvancedUserInterface, \Serializable
      * @param array $roles
      * @return User
      */
-    public function setRoles($roles)
+    public function setRoles($roles = null)
     {
         $this->roles = $roles;
 

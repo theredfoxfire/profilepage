@@ -234,9 +234,6 @@ class Profile
      */
     public function getFoto()
     {
-		if (empty($this->foto)) {
-			$this->foto = 'profile.png';
-		}
         return $this->foto;
     }
 

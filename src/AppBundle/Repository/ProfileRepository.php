@@ -21,6 +21,7 @@ class ProfileRepository extends EntityRepository
 			->join('u.profile', 'p')
 			->where('p.name like :key')->setParameter('key', '%'.$key.'%')
 			->andWhere('u.is_admin = :rol')->setParameter('rol',false)
+			->andWhere('u.is_active = :act')->setParameter('act', true)
 			->setMaxResults(75)
 			->getQuery()
 			->getResult()

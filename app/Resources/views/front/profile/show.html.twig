@@ -6,7 +6,11 @@
 			 <div class="details">
 			 <br>
 				 <h3>{{ profile.name }}</h3> 
-				 <img src="{{ asset('images/dosen/') }}{{ profile.foto }}" alt=""/>
+				 {% if profile.foto %}
+					<img src="{{ asset('images/dosen/') }}{{ profile.foto }}" alt=""/>
+				{% else %}
+					<img src="{{ asset('images/dosen/profile.png') }}" alt=""/>
+				{% endif %}
 			 </div>
 			<div class="details">
 				<address>

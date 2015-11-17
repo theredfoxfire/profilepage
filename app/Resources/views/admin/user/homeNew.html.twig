@@ -1,0 +1,25 @@
+{% extends 'baseNew.html.twig' %}
+
+{% block body %}
+<div class="container">
+                    <div class="row">
+                    <br><br><br>
+                        <!--<div class="col-sm-8 col-sm-offset-2 text">-->
+                        <div class="panel panel-body welcome">
+                            <h3><b>Profile Dosen & Karyawan <br>STKIP SURYA</b></h3>
+                            <br>
+                            <div class="description">
+                            	<h4>
+	                            	Hallo, 
+	                            	{% if app.user.profile.name %}
+										{{ app.user.profile.name }}
+	                            	{% else %}
+										{{ app.user.username }}
+	                            	{% endif %}
+                            	</h4>
+                            	<p>Selamat Anda sekarang memiliki akun untuk memulai menulis profile. Namun akun Anda masih belum aktif, silahkan hubungi via email ke sys.adm@stkipsurya.ac.id untuk informasi lebih lanjut.</p>
+                            </div>
+                        </div>
+                    </div>
+</div>
+{% endblock %}

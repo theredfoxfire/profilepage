@@ -39,7 +39,11 @@
 				{% for person in persons %}
 					<li class="col-md-2">
 						<a href="{{ path('person_show_profile', {'id': person.profile.id}) }}" class=" b-animate-go thickbox img-thumbnail">
-							<img src="{{ asset('images/dosen/') }}{{ person.profile.foto }}" alt="" class="img-responsive"/>
+							{% if person.profile.foto %}
+								<img src="{{ asset('images/dosen/') }}{{ person.profile.foto }}" alt="" class="img-responsive"/>
+							{% else %}
+								<img src="{{ asset('images/dosen/profile.png') }}" alt="" class="img-responsive"/>
+							{% endif %}
 							<div>
 								
 								<h5>{{ person.profile.name }}</h5>

@@ -114,4 +114,46 @@ class UserController extends Controller
 		
 		return $this->redirect($this->generateUrl('user_list'));
 	}
+	
+	/**
+	 * @Route("/user/upgrade/{id}", requirements={"id": "\d+"}, name="user_upgrade")
+	 * @Method("GET")
+	 */
+	public function upgradeAction($id)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$entity = $em->getRepository('AppBundle:User')->findOneById($id);
+		
+		if (!$entity) {
+			throw $this->createNotFoundException('Data user tidak ditemukan!');
+		}
+		
+		$this->get('session')->getFlashBag()->add('notice', 'User berhasil diupgrade menjadi ROLE_ADMIN.');
+		
+		$entity->setRoles(array('ROLE_ADMIN'));
+		$em->flush();
+		
+		return $this->redirect($this->generateUrl('user_list'));
+	}
+	
+	/**
+	 * @Route("/user/downgrade/{id}", requirements={"id": "\d+"}, name="user_downgrade")
+	 * @Method("GET")
+	 */
+	public function downgradeAction($id)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$entity = $em->getRepository('AppBundle:User')->findOneById($id);
+		
+		if (!$entity) {
+			throw $this->createNotFoundException('Data user tidak ditemukan!');
+		}
+		
+		$this->get('session')->getFlashBag()->add('notice', 'User berhasil didowngrade menjadi ROLE_USER');
+		
+		$entity->setRoles();
+		$em->flush();
+		
+		return $this->redirect($this->generateUrl('user_list'));
+	}
 }

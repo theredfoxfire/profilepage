@@ -44,6 +44,16 @@ class ProfileController extends Controller
 	}
 	
 	/**
+	 * @Route("/user/new", name="user_new")
+	 * @Method({"GET"})
+	 */
+	public function newAction()
+	{
+		
+			return $this->render('admin/user/homeNew.html.twig');
+	}
+	
+	/**
 	 * @Route("/user/profile/edit", name="user_profile_edit");
 	 * @Method({"GET", "POST"})
 	 */
@@ -87,7 +97,8 @@ class ProfileController extends Controller
             $file = $profile->getFile();
             if (!empty($file)) {
 				$dir = $this->container->getParameter('kernel.root_dir').'/../web/images/dosen';
-				if (!empty($profile->getFoto())) {
+				$l_foto = $profile->getFoto();
+				if (!empty($l_foto)) {
 					unlink($dir.'/'.$profile->getFoto());
 				}
 				
@@ -148,6 +159,16 @@ class ProfileController extends Controller
 			return $this->redirect($this->generateUrl('user_profile_edit'));
 		}
 		
+		if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
+			return $this->render('admin/profile/editAdmin.html.twig', array(
+				'profile' => $profile,
+				'form' => $editForm->createView(),
+				'minat' => $minatForm->createView(),
+				'edu' => $eduForm->createView(),
+				'work' => $workForm->createView(),
+				'url' => $urlForm->createView(),
+			));
+		}
 		return $this->render('admin/profile/edit.html.twig', array(
 			'profile' => $profile,
 			'form' => $editForm->createView(),

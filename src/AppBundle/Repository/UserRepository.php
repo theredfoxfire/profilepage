@@ -19,6 +19,7 @@ class UserRepository extends EntityRepository
 		->from('AppBundle\Entity\User', 'u')
 		->select('u')
 		->where('u.is_admin = :rol')->setParameter('rol',false)
+		->andWhere('u.is_active = :act')->setParameter('act', true)
 		->orderBy('u.username')
 		->setMaxResults(75)
 		->getQuery()

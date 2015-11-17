@@ -42,8 +42,14 @@ class LdapController extends Controller
 				$ep = $encoder->encodePassword($password, $user->getSalt());
 				
 				$user_log = $em->getRepository('AppBundle:User')->getLogUser($username, $ep);
+				
 				if (!$user_log) {
 					$this->get('session')->getFlashBag()->add('notice', 'Login gagal, periksa kembali username & password Anda.');
+					return $this->redirect($this->generateUrl('ldap_register'));
+				}
+				
+				if ($user->getIsActive() == false) {
+					$this->get('session')->getFlashBag()->add('notice', 'Login gagal, sepertinya akun Anda sudah tidak aktif.');
 					return $this->redirect($this->generateUrl('ldap_register'));
 				}
 				
@@ -131,7 +137,7 @@ class LdapController extends Controller
 					$encoder = $factory->getEncoder($new);
 					$ep = $encoder->encodePassword($password, $new->getSalt());
 					$new->setUsername($username);
-					$new->setIsActive(true);
+					$new->setIsActive(false);
 					$new->setIsAdmin(false);
 					$new->setPassword($ep);
 					$em->persist($new);
@@ -147,7 +153,7 @@ class LdapController extends Controller
 					$em->flush();
 					
 					$this->authenticateUser($user);
-					return $this->redirect($this->generateUrl('user_home'));
+					return $this->redirect($this->generateUrl('user_new'));
 				} else {
 					$this->authenticateUser($user);
 					return $this->redirect($this->generateUrl('user_home'));
