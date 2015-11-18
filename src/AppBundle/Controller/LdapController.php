@@ -49,7 +49,7 @@ class LdapController extends Controller
 				}
 				
 				if ($user->getIsActive() == false) {
-					$this->get('session')->getFlashBag()->add('notice', 'Login gagal, sepertinya akun Anda sudah tidak aktif.');
+					$this->get('session')->getFlashBag()->add('notice', 'Maaf akun Anda belum aktif, Silahkan konfirmasi ke sys.adm@stkipsurya.ac.id untuk aktivasi.');
 					return $this->redirect($this->generateUrl('ldap_register'));
 				}
 				

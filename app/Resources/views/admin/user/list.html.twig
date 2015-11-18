@@ -57,11 +57,11 @@
 					{% for role in user.roles %}
 						{% if role == 'ROLE_ADMIN' %}
 							<a href="{{ path('user_downgrade', {'id': user.id}) }}">
-								<button type='submit' class='btn btn-danger align-left'><i class="fa fa-ban"></i> DOWNGRADE</button>
+								<button type='submit' class='btn btn-danger align-left'><i class="fa fa-ban"></i> SET USER</button>
 							</a>
 						{% else %}
 							<a href="{{ path('user_upgrade', {'id': user.id}) }}">
-								<button class='btn btn-success'><i class="fa fa-check-square-o align-left"></i> UPGRADE</button>
+								<button class='btn btn-success'><i class="fa fa-check-square-o align-left"></i> SET ADMIN</button>
 							</a>
 						{% endif %}
 					{% endfor %}
