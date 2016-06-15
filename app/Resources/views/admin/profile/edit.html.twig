@@ -40,49 +40,49 @@
 								<div class="form-group">
 								<label for="exampleInputEmail1">Nama Lengkap:</label>
 								{{ form_widget(form.name) }}
-								
+
 								{{ form_errors(form.name) }}
 								</div>
 								<div class="form-group">
 								<label>Posisi saat ini di STKIP:</label>
 								{{ form_widget(form.position) }}
-								
+
 								{{ form_errors(form.position) }}
 								</div>
 								<div class="form-group">
 								<label for="exampleInputEmail1">Tempat Kelahiran:</label>
 								{{ form_widget(form.pob) }}
-								
+
 								{{ form_errors(form.pob) }}
 								</div>
 								<div class="form-group">
 								<label for="exampleInputEmail1">Tanggal Lahir:</label>
 								{{ form_widget(form.dob) }}
-								
+
 								{{ form_errors(form.dob) }}
 								</div>
 								<div class="form-group">
 								<label for="exampleInputEmail1">Alamat Email:</label>
 								{{ form_widget(form.email) }}
-								
+
 								{{ form_errors(form.email) }}
 								</div>
 								<div class="form-group">
 								<label for="exampleInputEmail1">Nomor Telephone atau Hp:</label>
 								{{ form_widget(form.phone) }}
-								
+
 								{{ form_errors(form.phone) }}
 								</div>
 								<div class="form-group">
 								<label for="exampleInputEmail1">Alamat tinggal:</label>
 								{{ form_widget(form.address) }}
-								
+
 								{{ form_errors(form.address) }}
 								</div>
 								<div class="form-group">
 								<label for="exampleInputEmail1">Tentang Anda:</label>
 								{{ form_widget(form.about) }}
-								
+
 								{{ form_errors(form.about) }}
 								</div>
 						<button type='submit' class='btn btn-primary pull-right'><i class='fa fa-check-square-o'></i> SIMPAN</a>
@@ -207,7 +207,7 @@
 		<div class="form-group">
 			<label for="exampleInputEmail1">Minat dan Keahlian:</label>
 			{{ form_widget(minat.expertise) }}
-			
+
 			{{ form_errors(minat.expertise) }}
 		</div>
 		<button type='submit' class='btn btn-primary pull-right'><i class='fa fa-check-square-o'></i> SIMPAN</a>
@@ -224,13 +224,13 @@
 			<div class="form-group">
 			<label for="exampleInputEmail1">Judul Video:</label>
 			{{ form_widget(url.title) }}
-			
+
 			{{ form_errors(url.title) }}
 			</div>
 			<div class="form-group">
 			<label for="exampleInputEmail1">Alamat URL:</label>
 			{{ form_widget(url.url) }}
-			
+
 			{{ form_errors(url.url) }}
 			</div>
 		<button type='submit' class='btn btn-primary pull-right'><i class='fa fa-check-square-o'></i> SIMPAN</a>
@@ -260,6 +260,14 @@
 </div>
 
 <script>
+$(document).ready(function() {
+    $('.birth-date').datepicker({
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '-100:+0',
+    });
+});
 $(document).ready(function(){
     $(".nav-tabs a").click(function(){
         $(this).tab('show');

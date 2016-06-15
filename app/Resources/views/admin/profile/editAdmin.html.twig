@@ -16,6 +16,7 @@
     <li><a href="#menu1">Riwayat Pendidikan</a></li>
     <li><a href="#menu4">Pengalaman Kerja</a></li>
     <li><a href="#menu2">Minat & Keahlian</a></li>
+    <li><a href="#menu5">Publikasi</a></li>
     <li><a href="#menu3">Video URL</a></li>
   </ul>
 
@@ -40,49 +41,49 @@
 								<div class="form-group">
 								<label for="exampleInputEmail1">Nama Lengkap:</label>
 								{{ form_widget(form.name) }}
-								
+
 								{{ form_errors(form.name) }}
 								</div>
 								<div class="form-group">
 								<label>Posisi saat ini di STKIP:</label>
 								{{ form_widget(form.position) }}
-								
+
 								{{ form_errors(form.position) }}
 								</div>
 								<div class="form-group">
 								<label for="exampleInputEmail1">Tempat Kelahiran:</label>
 								{{ form_widget(form.pob) }}
-								
+
 								{{ form_errors(form.pob) }}
 								</div>
 								<div class="form-group">
 								<label for="exampleInputEmail1">Tanggal Lahir:</label>
 								{{ form_widget(form.dob) }}
-								
+
 								{{ form_errors(form.dob) }}
 								</div>
 								<div class="form-group">
 								<label for="exampleInputEmail1">Alamat Email:</label>
 								{{ form_widget(form.email) }}
-								
+
 								{{ form_errors(form.email) }}
 								</div>
 								<div class="form-group">
 								<label for="exampleInputEmail1">Nomor Telephone atau Hp:</label>
 								{{ form_widget(form.phone) }}
-								
+
 								{{ form_errors(form.phone) }}
 								</div>
 								<div class="form-group">
 								<label for="exampleInputEmail1">Alamat tinggal:</label>
 								{{ form_widget(form.address) }}
-								
+
 								{{ form_errors(form.address) }}
 								</div>
 								<div class="form-group">
 								<label for="exampleInputEmail1">Tentang Anda:</label>
 								{{ form_widget(form.about) }}
-								
+
 								{{ form_errors(form.about) }}
 								</div>
 						<button type='submit' class='btn btn-primary pull-right'><i class='fa fa-check-square-o'></i> SIMPAN</a>
@@ -207,7 +208,7 @@
 		<div class="form-group">
 			<label for="exampleInputEmail1">Minat dan Keahlian:</label>
 			{{ form_widget(minat.expertise) }}
-			
+
 			{{ form_errors(minat.expertise) }}
 		</div>
 		<button type='submit' class='btn btn-primary pull-right'><i class='fa fa-check-square-o'></i> SIMPAN</a>
@@ -215,6 +216,7 @@
       {{ form_end(minat) }}
       </div>
     </div>
+
     <div id="menu3" class="tab-pane fade">
       <h3>Video URL</h3>
       <p>Jika Anda memiliki tautan video yang berkaitan dengan minat dan keahlian Anda, Anda bisa menambahkan link URL video tersebut di sini.</p>
@@ -224,13 +226,54 @@
 			<div class="form-group">
 			<label for="exampleInputEmail1">Judul Video:</label>
 			{{ form_widget(url.title) }}
-			
+
 			{{ form_errors(url.title) }}
 			</div>
 			<div class="form-group">
 			<label for="exampleInputEmail1">Alamat URL:</label>
 			{{ form_widget(url.url) }}
-			
+
+			{{ form_errors(url.url) }}
+			</div>
+		<button type='submit' class='btn btn-primary pull-right'><i class='fa fa-check-square-o'></i> SIMPAN</a>
+		{{ form_row(url._token) }}
+		{{ form_end(url) }}
+      </div>
+      <br>
+		  <hr>
+		  <div class="panel panel-info">
+		  <div class="panel-heading"><h3>Daftar Video</h3></div>
+		  {% set i = 0 %}
+		  {% for url in app.user.url %}
+				<ul class="list-group text-left">
+					<li class="list-group-item">Judul: {{ url.title }}</li>
+					<li class="list-group-item">Video: {{ url.url }}</li>
+				</ul>
+				<div class="panel-body edu-strip">
+				</div>
+			{% set i = i + 1 %}
+			{% endfor %}
+			{% if i == 0 %}
+				<div class="panel-body edu-strip">Data Video Masih Kosong</div>
+			{% endif %}
+		</div>
+    </div>
+    <div id="menu5" class="tab-pane fade">
+      <h3>Publikasi</h3>
+      <p>Silahkan upload publikasi Anda.</p>
+      <div class="text-left">
+		{{ form_start(url) }}
+		{{ form_errors(url) }}
+			<div class="form-group">
+			<label for="exampleInputEmail1">Judul Video:</label>
+			{{ form_widget(url.title) }}
+
+			{{ form_errors(url.title) }}
+			</div>
+			<div class="form-group">
+			<label for="exampleInputEmail1">Alamat URL:</label>
+			{{ form_widget(url.url) }}
+
 			{{ form_errors(url.url) }}
 			</div>
 		<button type='submit' class='btn btn-primary pull-right'><i class='fa fa-check-square-o'></i> SIMPAN</a>
@@ -260,6 +303,14 @@
 </div>
 
 <script>
+$(document).ready(function() {
+    $('.birth-date').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '-100:+0',
+        dateFormat: 'dd-mm-yy',
+    });
+});
 $(document).ready(function(){
     $(".nav-tabs a").click(function(){
         $(this).tab('show');

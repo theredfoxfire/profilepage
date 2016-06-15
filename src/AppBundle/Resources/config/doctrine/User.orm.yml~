@@ -7,6 +7,9 @@ AppBundle\Entity\User:
    type: integer
    generator: { strategy: AUTO }
  fields:
+  is_admin:
+   type: boolean
+   nullable: true
   roles:
    type: json_array
    nullable: true
@@ -18,6 +21,9 @@ AppBundle\Entity\User:
    type: string
   salt:
    type: string
+  is_active:
+   type: boolean
+   default: true
  oneToOne:
   profile:
    targetEntity: Profile
@@ -25,12 +31,10 @@ AppBundle\Entity\User:
  oneToMany:
   education:
    targetEntity: Education
-   mappedBy: profile
+   mappedBy: user
   url:
    targetEntity: Url
-   mappedBy: profile
+   mappedBy: user
   workexperience:
    targetEntity: WorkExperience
-   mappedBy: profile
- #lifecycleCallbacks:
-  #prePersist: [ setSaltValue ]
+   mappedBy: user
