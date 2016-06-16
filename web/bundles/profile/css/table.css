@@ -1,0 +1,14 @@
+.td-hover td:hover {
+	background-color: #E5FFD9;
+	cursor: pointer;
+}
+a:hover, a.hover{
+	text-decoration: none !important;
+}
+.clear {
+	padding-left:18px;
+}
+.room {
+	height:100%;
+	width:100%;
+}
