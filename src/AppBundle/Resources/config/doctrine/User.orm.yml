@@ -35,6 +35,9 @@ AppBundle\Entity\User:
   url:
    targetEntity: Url
    mappedBy: user
+  publikasi:
+   targetEntity: Publikasi
+   mappedBy: user
   workexperience:
    targetEntity: WorkExperience
    mappedBy: user

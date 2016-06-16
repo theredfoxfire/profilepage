@@ -401,4 +401,42 @@ class User implements AdvancedUserInterface, \Serializable
     {
 		return ($this->is_active == true ? $this->status = "Aktif" : $this->status = "Tidak Aktif");
 	}
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $publikasi;
+
+
+    /**
+     * Add publikasi
+     *
+     * @param \AppBundle\Entity\Publikasi $publikasi
+     * @return User
+     */
+    public function addPublikasi(\AppBundle\Entity\Publikasi $publikasi)
+    {
+        $this->publikasi[] = $publikasi;
+
+        return $this;
+    }
+
+    /**
+     * Remove publikasi
+     *
+     * @param \AppBundle\Entity\Publikasi $publikasi
+     */
+    public function removePublikasi(\AppBundle\Entity\Publikasi $publikasi)
+    {
+        $this->publikasi->removeElement($publikasi);
+    }
+
+    /**
+     * Get publikasi
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPublikasi()
+    {
+        return $this->publikasi;
+    }
 }
